@@ -9,7 +9,7 @@ class UploadImage extends Component
 {
     use WithFileUploads;
 
-    public $avatar;
+    public $photos = [];
 
     public function render()
     {
@@ -19,9 +19,15 @@ class UploadImage extends Component
     public function save()
     {
         $this->validate([
-            'avatar' => 'required|image|max:100', // 1MB Max
+            'photos.*' => 'required|image|max:2048', // 2MB Max
         ]);
 
-        $this->avatar->store('avatars');
+        foreach ($this->photos as $key => $photo) {
+            $this->photos[$key] = $photo->store('photo');
+        }
+
+        $this->photos = [];
+
+        session()->flash('message', 'Images uploaded successfully.');
     }
 }

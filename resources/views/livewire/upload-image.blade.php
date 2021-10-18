@@ -1,19 +1,31 @@
 <div>
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
     <form wire:submit.prevent="save">
-        {{ dump($avatar) }}
-        @if(0)
-            @if($avatar)
-                <img src="{{$avatar->temporaryUrl()}}" alt="" width="100" height="100">
+
+            @if($photos)
+                @foreach($photos as $key => $photo)
+                    <img src="{{$photo->temporaryUrl()}}" alt="" width="100" height="100">
+                @endforeach
                 <br>
             @endif
-        @endif
 
-        <input type="file" name="avatar" wire:model="avatar">
-        @error('avatar') <span class="error">{{ $message }}</span> @enderror
+            <div class="form-group">
+                <input type="file" wire:model="photos" multiple class="form-control">
 
-        <br>
-        <br>
-        <br>
-        <button type="submit">Save</button>
+                @error('photos.*')
+                <small class="text-danger">
+                    <span class="error">{{ $message }}</span>
+                </small>
+                @enderror
+
+                <div wire:loading wire:target="images">Uploading...</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
