@@ -3,12 +3,24 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel-Livewire Upload Image</title>
-        <link href="{{ mix('/css/app.css') }}" rel="stylesheet"></link>
-        <script src="{{ mix('/js/app.js') }}"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
         @livewireStyles
+
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body>
+    <body class="font-sans antialiased bg-light">
+        <!-- Page Heading -->
+
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
             <h5 class="my-0 mr-md-auto font-weight-normal">Livewire Demo</h5>
             <nav class="my-2 my-md-0 mr-md-3">
@@ -19,9 +31,18 @@
             </nav>
             <a class="btn btn-outline-primary" href="#">Sign up</a>
         </div>
-        <div class="container">
-            @livewire('upload-image')
-        </div>
+
+        <!-- Page Content -->
+        <main class="container my-5">
+            {{ $slot }}
+        </main>
+
+        @stack('modals')
+
         @livewireScripts
+
+        @stack('scripts')
+
+
     </body>
 </html>

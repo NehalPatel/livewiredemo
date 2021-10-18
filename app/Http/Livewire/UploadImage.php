@@ -23,11 +23,16 @@ class UploadImage extends Component
         ]);
 
         foreach ($this->photos as $key => $photo) {
-            $this->photos[$key] = $photo->store('photo');
+            $this->photos[$key] = $photo->store('public/photos');
         }
 
         $this->photos = [];
 
         session()->flash('message', 'Images uploaded successfully.');
+    }
+
+    public function delete()
+    {
+        session()->flash('message', 'Na karu delete jaaaa.....');
     }
 }

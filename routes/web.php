@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/upload', function(){
-    return view('upload');
-});
+Route::resource('photo',  App\Http\Controllers\PhotosController::class);
