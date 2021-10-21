@@ -11,11 +11,19 @@
             @error('post.body')<span class="error invalid-feedback">{{ $message }}</span> @enderror
         </div>
 
-        <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
-        x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false"
-        x-on:livewire-upload-progress="progress = $event.detail.progress">
+        @if($post->media)
+        <div class="row">
+            @foreach($post->media as $photo)
+            <div class="col-sm">
+                <img src="{{ $photo->getUrl() }}" alt="" height="200" width="200" class="img-fluid img-thumbnail">
+            </div>
+            @endforeach
+        </div>
+        @endif
+
+        <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
             <div class="w-full rounded-lg text-center text-gray-500 p-4 cursor-pointer border border-dashed border-gray-500" @click="$refs.fileInput.click()">
-            Upload Images
+                Upload Images
             </div>
             <input x-ref="fileInput" type="file" multiple wire:model="photos" class="hidden" />
 
@@ -26,24 +34,23 @@
         </div>
 
         @if ($photos)
-            <div class="row">
+        <div class="row">
             @foreach($photos as $photo)
-                    <div class="col-sm-4" wire:key="{{$loop->index}}">
-                        <i class="fas fa-times-circle text-gray-700 text-2xl float-right cursor-pointer"
-                        wire:click="remove({{$loop->index}})"></i>
-                        <div class="flex justify-center">
-                            <img src="{{ $photo->temporaryUrl() }}" height="200px" class="img-thumbnail img-fluid">
-                        </div>
+            <div class="col-sm-4" wire:key="{{$loop->index}}">
+                <i class="fas fa-times-circle text-gray-700 text-2xl float-right cursor-pointer" wire:click="remove({{$loop->index}})"></i>
+                <div class="flex justify-center">
+                    <img src="{{ $photo->temporaryUrl() }}" height="200px" class="img-thumbnail img-fluid">
+                </div>
 
-                        @error("photos.$loop->index")
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                            <strong class="font-bold">Error!</strong>
-                            <span class="error">{{ $message }}</span>
-                        </div>
-                        @enderror
-                    </div>
-            @endforeach
+                @error("photos.$loop->index")
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="error">{{ $message }}</span>
+                </div>
+                @enderror
             </div>
+            @endforeach
+        </div>
         @endif
 
         <div class="form-group">

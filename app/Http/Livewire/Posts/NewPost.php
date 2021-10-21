@@ -25,6 +25,8 @@ class NewPost extends Component
     public function mount(Post $post)
     {
         $this->post = $post;
+
+        $this->post->media = $post->getMedia();
     }
 
     public function render()
@@ -43,10 +45,17 @@ class NewPost extends Component
         $this->post->save();
 
         foreach ($this->photos as $photo) {
-            // dump($photo->path());
+            // dump($photo->getClientOriginalName());
             // dd($photo);
             // $photo->store('photos');
-            $this->post->addMedia($photo->getRealPath())->toMediaCollection('photos');
+            $fileName = $photo->getClientOriginalName();
+            $this->post
+                ->addMedia($photo->getRealPath())
+                ->usingName($fileName)
+                ->sanitizingFileName(function ($fileName) {
+                    return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                })
+                ->toMediaCollection();
         }
         $this->photos = [];
 
