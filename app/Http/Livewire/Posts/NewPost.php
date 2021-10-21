@@ -4,16 +4,22 @@ namespace App\Http\Livewire\Posts;
 
 use Livewire\Component;
 use App\Models\Post;
+use Livewire\WithFileUploads;
 
 class NewPost extends Component
 {
+    use WithFileUploads;
+
     public $post_id;
 
     public Post $post;
 
+    public $photos = [];
+
     protected $rules = [
         'post.title'        => 'required|max:255',
-        'post.body'         => 'required'
+        'post.body'         => 'required',
+        'photos.*'          => 'image|max:1024', // 1MB Max
     ];
 
     public function mount(Post $post)
@@ -35,6 +41,11 @@ class NewPost extends Component
     {
         $this->validate();
         $this->post->save();
+
+        foreach ($this->photos as $photo) {
+            $photo->store('photos');
+        }
+        $this->photos = [];
 
         return redirect()->to('posts')->with('message', 'Post saved successfully.');
     }

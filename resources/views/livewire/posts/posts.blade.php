@@ -15,6 +15,9 @@
     </div>
     <div class="clearfix"></div>
     <br>
+    @if($posts->isEmpty())
+        <p>No posts found. Create new post</p>
+    @else
     <table class="table table-striped- table-bordered table-hover table-checkable">
         <thead>
         <tr>
@@ -53,5 +56,5 @@
     </table>
 
     {{ $posts->links() }}
-
+    @endif
 </div>
