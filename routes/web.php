@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('photo',  App\Http\Controllers\PhotosController::class);
+
+Route::resource('posts',  App\Http\Controllers\PostsController::class);
