@@ -43,10 +43,18 @@ class NewPost extends Component
         $this->post->save();
 
         foreach ($this->photos as $photo) {
-            $photo->store('photos');
+            // dump($photo->path());
+            // dd($photo);
+            // $photo->store('photos');
+            $this->post->addMedia($photo->getRealPath())->toMediaCollection('photos');
         }
         $this->photos = [];
 
         return redirect()->to('posts')->with('message', 'Post saved successfully.');
+    }
+
+    public function remove($index)
+    {
+        array_splice($this->photos, $index, 1);
     }
 }
