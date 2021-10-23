@@ -26,7 +26,7 @@ class NewPost extends Component
     {
         $this->post = $post;
 
-        $this->post->media = $post->getMedia();
+        $this->post['media'] = $post->getMedia();
     }
 
     public function render()
@@ -60,6 +60,13 @@ class NewPost extends Component
         $this->photos = [];
 
         return redirect()->to('posts')->with('message', 'Post saved successfully.');
+    }
+
+    public function removeMedia($post_id, $media_id)
+    {
+        $this->post->deleteMedia($media_id);
+        $this->post = Post::findOrFail($post_id);
+        $this->post['media'] = $this->post->getMedia();
     }
 
     public function remove($index)

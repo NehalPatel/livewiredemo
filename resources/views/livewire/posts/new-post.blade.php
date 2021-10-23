@@ -16,6 +16,7 @@
             @foreach($post->media as $photo)
             <div class="col-sm">
                 <img src="{{ $photo->getUrl() }}" alt="" height="200" width="200" class="img-fluid img-thumbnail">
+                <a href="#" class="btn btn-danger btn-block" wire:click="removeMedia({{ $photo->id }}, {{$photo->id}})">Remove</a>
             </div>
             @endforeach
         </div>
