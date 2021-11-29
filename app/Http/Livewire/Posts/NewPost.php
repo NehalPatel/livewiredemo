@@ -10,8 +10,6 @@ class NewPost extends Component
 {
     use WithFileUploads;
 
-    public $post_id;
-
     public Post $post;
 
     public $photos = [];
@@ -45,9 +43,6 @@ class NewPost extends Component
         $this->post->save();
 
         foreach ($this->photos as $photo) {
-            // dump($photo->getClientOriginalName());
-            // dd($photo);
-            // $photo->store('photos');
             $fileName = $photo->getClientOriginalName();
             $this->post
                 ->addMedia($photo->getRealPath())

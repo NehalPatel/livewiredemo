@@ -14,9 +14,9 @@
         @if($post->media)
         <div class="row">
             @foreach($post->media as $photo)
-            <div class="col-sm">
+            <div class="col-sm-3">
                 <img src="{{ $photo->getUrl() }}" alt="" height="200" width="200" class="img-fluid img-thumbnail">
-                <a href="#" class="btn btn-danger btn-block" wire:click="removeMedia({{ $photo->id }}, {{$photo->id}})">Remove</a>
+                <a href="#" class="btn btn-danger btn-block" wire:click="removeMedia({{ $post->id }}, {{$photo->id}})">Remove</a>
             </div>
             @endforeach
         </div>
@@ -30,7 +30,7 @@
 
             <!-- Progress Bar -->
             <div x-show="isUploading">
-                <progress max="100" x-bind:value="progress" class="w-full"></progress>
+                <progress max="100" x-bind:value="progress" class="w-full" style="width: 100%"></progress>
             </div>
         </div>
 
