@@ -15,12 +15,14 @@
         <div class="row">
             @foreach($post->media as $photo)
             <div class="col-sm-3">
-                <img src="{{ $photo->getUrl() }}" alt="" height="200" width="200" class="img-fluid img-thumbnail">
+                <img src="{{ $photo->getUrl('thumbnail') }}" alt="" height="200" width="200" class="img-fluid img-thumbnail">
                 <a href="#" class="btn btn-danger btn-block" wire:click="removeMedia({{ $post->id }}, {{$photo->id}})">Remove</a>
             </div>
             @endforeach
         </div>
         @endif
+
+        <livwire:upload_photos />
 
         <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
             <div class="w-full rounded-lg text-center text-gray-500 p-4 cursor-pointer border border-dashed border-gray-500" @click="$refs.fileInput.click()">
