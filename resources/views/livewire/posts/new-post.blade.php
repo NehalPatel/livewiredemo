@@ -1,4 +1,7 @@
 <div>
+
+    @livewire('upload')
+
     <form class="form" wire:submit.prevent="save">
         <div class="form-group">
             <label for="title">Post Title</label>
@@ -21,8 +24,6 @@
             @endforeach
         </div>
         @endif
-
-        <livwire:upload_photos />
 
         <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
             <div class="w-full rounded-lg text-center text-gray-500 p-4 cursor-pointer border border-dashed border-gray-500" @click="$refs.fileInput.click()">

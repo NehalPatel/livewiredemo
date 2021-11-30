@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class UploadPhotos extends Component
+class Upload extends Component
 {
     public function render()
     {
-        return view('livewire.upload-photos');
+        return view('livewire.upload');
     }
 }
