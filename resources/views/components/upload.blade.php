@@ -48,51 +48,28 @@
         <div class="uploaded-images">
             <div class="card">
                 <div class="card-body">
-                    <div class="item-wrapper d-flex align-items-center p-2">
-                        @foreach($photos as $key => $photo)
+                    @foreach($photos as $key => $photo)
+                    <div class="item-wrapper d-flex align-items-center p-2 @if (!$loop->first) border-top @endif">
 
                         <img src="{{$photo->temporaryUrl()}}" width="100" height="100" class="img-thumbnail align-self-start">
 
                         <div class="meta p-2">
                             <p class="card-text m-0 text-dark">{{$photo->getClientOriginalExtension()}}</p>
-
-
-                            <p class="card-text text-dark">{{$photo->getClientSize()}} KB</p>
-
-
+                            <p class="card-text text-dark">{{ number_format( $photo->getSize() / 1048576,2); }} KB</p>
                             <a class="btn btn-sm btn-outline-primary" href="#">Download</a>
                         </div>
-
-                        @endforeach
 
                         <div class="extras p-2 align-self-end">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <p class="text text-dark">Image-long-name-goes-here.jpg</p>
+                                <p class="text text-dark">{{ $photo->getClientOriginalName() }}</p>
                             </div>
                             <a href="#" class="close">
                                 <span aria-hidden="true">&times;</span>
                             </a>
                         </div>
                     </div>
-
-                    <div class="item-wrapper d-flex align-items-center p-2 border-top">
-                        <img src="https://via.placeholder.com/100" alt="" class="img-thumbnail align-self-start">
-                        <div class="meta p-2">
-                            <p class="card-text m-0 text-dark">JPEG</p>
-                            <p class="card-text text-dark">165.29 KB</p>
-                            <a class="btn btn-sm btn-outline-primary" href="#">Download</a>
-                        </div>
-                        <div class="extras p-2 align-self-end">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <p class="text text-dark">Image-long-name-goes-here.jpg</p>
-                            </div>
-                            <a href="#" class="close">
-                                <span aria-hidden="true">&times;</span>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
