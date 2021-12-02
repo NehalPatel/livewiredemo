@@ -1,5 +1,19 @@
 <div class="uploaded_images">
+
+    <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+        <div class="w-full rounded-lg text-center text-gray-500 p-4 cursor-pointer border border-dashed border-gray-500 my-3" @click="$refs.uploadbtn.click()" style="border-style: dashed !important;">
+            <span class="text-dark">Upload max 3 files | PNG, JPEG | <1024 KB</span>
+        </div>
+        <input x-ref="uploadbtn" type="file" multiple wire:model="photos" class="hidden" />
+
+        <!-- Progress Bar -->
+        <div x-show="isUploading">
+            <progress max="100" x-bind:value="progress" class="w-full" style="width: 100%"></progress>
+        </div>
+    </div>
+
     <div class="wrapper">
+        @if(0)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -28,21 +42,24 @@
                 </ul>
             </div>
         </div>
+        @endif
 
+        @if ($photos)
         <div class="uploaded-images">
             <div class="card">
                 <div class="card-body">
+
                     <div class="item-wrapper d-flex align-items-center p-2">
                         <img src="https://via.placeholder.com/100" alt="" class="img-thumbnail align-self-start">
                         <div class="meta p-2">
                             <p class="card-text m-0 text-dark">JPEG</p>
-                            <p class="card-text m-0 text-dark">165.29 KB</p>
+                            <p class="card-text text-dark">165.29 KB</p>
                             <a class="btn btn-sm btn-outline-primary" href="#">Download</a>
                         </div>
                         <div class="extras p-2 align-self-end">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" />
+                                <p class="text text-dark">Image-long-name-goes-here.jpg</p>
                             </div>
                             <a href="#" class="close">
                                 <span aria-hidden="true">&times;</span>
@@ -54,13 +71,13 @@
                         <img src="https://via.placeholder.com/100" alt="" class="img-thumbnail align-self-start">
                         <div class="meta p-2">
                             <p class="card-text m-0 text-dark">JPEG</p>
-                            <p class="card-text m-0 text-dark">165.29 KB</p>
+                            <p class="card-text text-dark">165.29 KB</p>
                             <a class="btn btn-sm btn-outline-primary" href="#">Download</a>
                         </div>
                         <div class="extras p-2 align-self-end">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" />
+                                <p class="text text-dark">Image-long-name-goes-here.jpg</p>
                             </div>
                             <a href="#" class="close">
                                 <span aria-hidden="true">&times;</span>
@@ -70,18 +87,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
-    </div>
-
-    <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
-        <div class="w-full rounded-lg text-center text-gray-500 p-4 cursor-pointer border border-dashed border-gray-500 mt-3" @click="$refs.uploadbtn.click()">
-            Upload max 3 files | PNG, JPEG | <1024 KB
-        </div>
-        <input x-ref="uploadbtn" type="file" multiple wire:model="photos" class="hidden" />
-
-        <!-- Progress Bar -->
-        <div x-show="isUploading">
-            <progress max="100" x-bind:value="progress" class="w-full" style="width: 100%"></progress>
-        </div>
     </div>
 </div>
