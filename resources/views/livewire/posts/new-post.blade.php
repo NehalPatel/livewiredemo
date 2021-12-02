@@ -12,7 +12,7 @@
             @error('post.body')<span class="error invalid-feedback">{{ $message }}</span> @enderror
         </div>
 
-        <x-input />
+        <x-upload :photos="$photos" />
 
         <div class="form-group">
             <div class="float-lg-right">
