@@ -45,7 +45,7 @@
         @endif
 
         @if ($photos)
-        <div class="uploaded-images">
+        <div class="uploaded-images mb-3">
             <div class="card">
                 <div class="card-body">
                     @foreach($photos as $key => $photo)
@@ -55,8 +55,7 @@
 
                         <div class="meta p-2">
                             <p class="card-text m-0 text-dark">{{$photo->getClientOriginalExtension()}}</p>
-                            <p class="card-text text-dark">{{ number_format( $photo->getSize() / 1048576,2); }} KB</p>
-                            <a class="btn btn-sm btn-outline-primary" href="#">Download</a>
+                            <p class="card-text m-0 text-dark">{{ number_format( $photo->getSize() / 1024,2) }} KB</p>
                         </div>
 
                         <div class="extras p-2 align-self-end">
@@ -64,7 +63,7 @@
                                 <label for="name">Name</label>
                                 <p class="text text-dark">{{ $photo->getClientOriginalName() }}</p>
                             </div>
-                            <a href="#" class="close">
+                            <a href="#" class="close" wire:click="remove({{ $loop->index }})">
                                 <span aria-hidden="true">&times;</span>
                             </a>
                         </div>

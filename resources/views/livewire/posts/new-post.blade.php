@@ -12,7 +12,9 @@
             @error('post.body')<span class="error invalid-feedback">{{ $message }}</span> @enderror
         </div>
 
-        <x-upload :photos="$photos" />
+        <x-uploaded-images :post="$post" />
+
+        <x-upload :photos="$photos" :modal="$post" />
 
         <div class="form-group">
             <div class="float-lg-right">
