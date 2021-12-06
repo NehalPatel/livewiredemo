@@ -17,7 +17,7 @@ class NewPost extends Component
     protected $rules = [
         'post.title'        => 'required|max:255',
         'post.body'         => 'required',
-        'photos.*'          => 'image|max:1024', // 1MB Max
+        'photos.*'          => 'image|mimes:png,jpg|max:1024', // 1MB Max
     ];
 
     public function mount(Post $post)

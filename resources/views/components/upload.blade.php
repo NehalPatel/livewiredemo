@@ -21,7 +21,7 @@
 
                     <div class="item-wrapper d-flex align-items-top @if (!$loop->first) border-top @endif">
 
-                        <img src="{{$photo->temporaryUrl()}}" width="100" height="100" class="img-thumbnail align-self-start">
+                        <img src="{{$photo?->temporaryUrl()}}" width="100" height="100" class="img-thumbnail align-self-start">
 
                         <div class="meta">
                             <p class="card-text m-0 text-dark">{{$photo->getClientOriginalExtension()}}</p>
