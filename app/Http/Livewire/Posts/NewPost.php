@@ -66,6 +66,7 @@ class NewPost extends Component
 
     public function remove($index)
     {
+        $this->resetValidation();
         array_splice($this->photos, $index, 1);
     }
 }

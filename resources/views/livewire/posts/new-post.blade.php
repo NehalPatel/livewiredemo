@@ -16,7 +16,7 @@
 
         <x-upload :photos="$photos" :modal="$post" />
 
-        <div class="form-group">
+        <div class="form-group py-3">
             <div class="float-lg-right">
                 <input class="btn btn-primary" type="submit" value="Save"> &nbsp;
                 <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
