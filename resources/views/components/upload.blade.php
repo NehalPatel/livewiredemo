@@ -33,7 +33,7 @@
                                 <label for="name">Name</label>
                                 <p class="text text-dark">{{ $photo->getClientOriginalName() }}</p>
                             </div>
-                            <a href="#" class="close" wire:click.prevent="remove({{ $loop->index }})">
+                            <a href="#" class="close" wire:click.prevent="removeUploadedImage({{ $loop->index }})">
                                 <span aria-hidden="true">&times;</span>
                             </a>
                         </div>

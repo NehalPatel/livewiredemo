@@ -22,8 +22,24 @@
         <thead>
         <tr>
             <th wire:click="sortByColumn('name')">
-                title
+                Title
                 @if ($sortColumn == 'name')
+                    <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
+                @else
+                    <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
+                @endif
+            </th>
+            <th wire:click="sortByColumn('created_at')">
+                Created At
+                @if ($sortColumn == 'created_at')
+                    <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
+                @else
+                    <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
+                @endif
+            </th>
+            <th wire:click="sortByColumn('updated_at')">
+                Updated At
+                @if ($sortColumn == 'updated_at')
                     <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
                 @else
                     <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
@@ -36,12 +52,16 @@
                 <input type="text" class="form-control" wire:model="searchColumns.title"/>
             </td>
             <td></td>
+            <td></td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
         @foreach($posts as $post)
             <tr>
                 <td>{{ $post->title }}</td>
+                <td>{{ $post->created_at->diffForHumans() }}</td>
+                <td>{{ $post->updated_at->diffForHumans() }}</td>
                 <td>
                     <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-secondary">
                         Edit

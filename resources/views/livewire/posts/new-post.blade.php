@@ -14,7 +14,7 @@
 
         <x-uploaded-images :post="$post" />
 
-        <x-upload :photos="$photos" :modal="$post" />
+        <x-upload :photos="$photos" />
 
         <div class="form-group py-3">
             <div class="float-lg-right">

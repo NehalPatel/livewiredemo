@@ -18,12 +18,32 @@
                         <label for="name">Name</label>
                         <p class="text text-dark">{{ $photo->name }}</p>
                     </div>
-                    <a href="#" class="close" wire:click.prevent="removeMedia({{ $post->id }}, {{$photo->id}})">
+                    <a href="#" class="close" wire:click="confirmRemoveMedia({{$photo->id}})" data-toggle="modal" data-target="#ImageDelete">
                         <span aria-hidden="true">&times;</span>
                     </a>
                 </div>
             </div>
             @endforeach
+        </div>
+    </div>
+</div>
+
+<div wire:ignore.self class="modal fade" id="ImageDelete" tabindex="-1" role="dialog" aria-labelledby="ImageDeleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ImageDeleteModal">Delete Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true close-btn">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                <button type="button" wire:click.prevent="removeMedia()" class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button>
+            </div>
         </div>
     </div>
 </div>
